@@ -7,8 +7,7 @@ const secrets = {
   id: process.env.ACCESS_TOKEN_SECRET || crypto.randomBytes(265).toString('hex'),
   refresh: process.env.REFRESH_TOKEN_SECRET || crypto.randomBytes(256).toString('hex')
 }
-debug('secrets', secrets)
-// console.log('secrets', secrets)
+debug('secrets: %o', secrets)
 
 const publicKey = process.env.JWT_PUBKEY || '/data/sites/nginx-sites/mattmadethese.com/nodejs/keys/jwt-public-rsa4096.pem'
 const privateKey = process.env.JWT_PUBKEY || '/data/sites/nginx-sites/mattmadethese.com/nodejs/keys/jwt-private-rsa4096.pem'
@@ -16,9 +15,7 @@ const keys = {
   public: fs.readFileSync(publicKey),
   private: fs.readFileSync(privateKey)
 }
-// console.log('keys', keys)
-// console.log('public key: ', keys.public.toString('hex'))
-// console.log('private key: ', keys.private.toString('hex'))
+debug('keys: %o', keys)
 
 const access_defaults = {
   algorithm: 'HS256',
@@ -46,9 +43,8 @@ const decode_options = {
 
 function createJWToken( payload, options ) {
   const tokenProperties = { ...access_defaults, ...options }
-  console.log('tokenProperties: ', tokenProperties)
+  debug('tokenProperties: %o', tokenProperties)
   let secretOrPrivateKey = (tokenProperties.algorithm === 'RS256') ? keys.private : secrets.id
-  console.log('secretOrPrivateKey: ', secretOrPrivateKey)
   const token = jwt.sign(payload, secretOrPrivateKey, tokenProperties)
 
   const refreshProperties = { ...refresh_defaults, ...options }
@@ -57,19 +53,69 @@ function createJWToken( payload, options ) {
   return { token, refresh }
 }
 
-function checkToken( token, options ) {
-  console.log('options: ', options)
+function checkToken( token, options, secret = null ) {
   const tokenProperties = { ...decode_options, ...options }
-  console.log(tokenProperties)
-  let secretOrPublicKey = (options.algorithm === 'RS256') ? keys.public : secrets.id
+  debug('combined token properties:  %o', tokenProperties)
+  let secretOrPublicKey = (options.algorithm === 'RS256') ? keys.public : (secret === null) ? secrets.id : secret
   let verified
-  try {
-    verified = jwt.verify(token, secretOrPublicKey, tokenProperties)
-  } catch (e) {
-    // console.dir(e)
-    verified = e
-  }
-  return verified 
+  jwt.verify(token, secretOrPublicKey, tokenProperties, function(err, decoded) {
+    if(err !== null) {
+      debug('JWT failed to verify...')
+      debug('err object keys: %o', Object.keys(err))
+      debug(err.name)
+      debug(err.message)
+      debug(err)
+      verified = {}
+      switch(err.message) {
+        case 'invalid signature': 
+          verified.status = "FAILED TO VERIFY TOKEN - invalid signature / signing algorithm mismatch"
+          verified.errorType = err.name
+          verified.message = err.message
+          console.log(err.message)
+          break
+        case err.message.match(/^jwt audience invalid/)?.input: 
+          verified.status = "FAILED TO VERIFY TOKEN - invalid audience claim"
+          verified.errorType = err.name
+          verified.message = err.message
+          console.log(err.message)
+          break
+        case err.message.match(/^jwt issuer invalid/)?.input: 
+          verified.status = "FAILED TO VERIFY TOKEN - invalid issuer claim"
+          verified.errorType = err.name
+          verified.message = err.message
+          console.log(err.message)
+          break
+        case err.message.match(/^jwt jwtid invalid/)?.input: 
+          verified.status = "FAILED TO VERIFY TOKEN - jwtid mismatch"
+          verified.errorType = err.name
+          verified.message = err.message
+          console.log(err.message)
+          break
+        case err.message.match(/^jwt subject invalid/)?.input: 
+          verified.status = "FAILED TO VERIFY TOKEN - invalid subject claim"
+          verified.errorType = err.name
+          verified.message = err.message
+          console.log(err.message)
+          break
+        case 'jwt expired': 
+          verified.status = "FAILED TO VERIFY TOKEN - expired token"
+          verified.errorType = err.name
+          verified.message = err.message
+          verified.expiredAt = err.expiredAt
+          break
+        default:
+          verified.status = "FAILED TO VERIFY TOKEN - reason not clear"
+          verified.errorType = 'JsonWebTokenError'
+          verified.generic = 'generic failure message'
+      }
+      verified.message = err.message
+      verified.error = err.name 
+    } else {
+      debug('JWT successfully verified and decoded. (hopefull?)')
+      verified = decoded
+    }
+  })
+  return verified
 }
 
 function _createJWTId() {
