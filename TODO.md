@@ -1,0 +1,11 @@
+- [ ] Create wrapper function to take options and either secret or RSA private key to generate JWT.
+- [ ] Create wrapper function to take options and verify/decode a JWT.
+- [ ] Create tests to check for invalid signing secret or RSA key.
+- [ ] Create a test to check for invalid signing algorithm.
+- [ ] Create a test to check for invalid subject claim.
+- [ ] Create a test to check for invalid issuer claim.
+- [ ] Create a test to check for invalid audience claim.
+- [ ] Create a test to check for expired token.
+- [ ] Integrate with the users npm package to automtically issue / verify tokens.
+- [ ] Publish as npm package.
+- [ ] ...
