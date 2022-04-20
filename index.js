@@ -1,4 +1,7 @@
-const debug = require('debug')('@mattduffy/mft')
+if (!module.parent) {
+  require('dotenv').config({ path: './tests/.env' }) 
+}
+const debug = require('debug')('mft:index')
 const fs = require('fs')
 const jwt = require('jsonwebtoken')
 const crypto = require('crypto')
@@ -9,8 +12,10 @@ const secrets = {
 }
 debug('secrets: %o', secrets)
 
-const publicKey = process.env.JWT_PUBKEY || '/data/sites/nginx-sites/mattmadethese.com/nodejs/keys/jwt-public-rsa4096.pem'
-const privateKey = process.env.JWT_PUBKEY || '/data/sites/nginx-sites/mattmadethese.com/nodejs/keys/jwt-private-rsa4096.pem'
+// const publicKey = process.env.JWT_PUBKEY || '/data/sites/nginx-sites/mattmadethese.com/nodejs/keys/jwt-public-rsa4096.pem'
+// const privateKey = process.env.JWT_PUBKEY || '/data/sites/nginx-sites/mattmadethese.com/nodejs/keys/jwt-private-rsa4096.pem'
+const publicKey = process.env.JWT_PUBKEY
+const privateKey = process.env.JWT_PUBKEY
 const keys = {
   public: fs.readFileSync(publicKey),
   private: fs.readFileSync(privateKey)

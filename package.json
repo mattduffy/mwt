@@ -4,7 +4,7 @@
   "description": "Token creation and management package.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "DEBUG=mft:* node index.js"
   },
   "repository": {
     "type": "git",
@@ -17,10 +17,11 @@
   },
   "homepage": "https://github.com/mattduffy/mft#readme",
   "devDependencies": {
-    "eslint": "^8.12.0"
+    "dotenv": "16.0.0",
+    "eslint": "~8.12.0"
   },
   "dependencies": {
-    "bcrypt": "^5.0.1",
-    "jsonwebtoken": "^8.5.1"
+    "bcrypt": "~5.0.1",
+    "jsonwebtoken": "~8.5.1"
   }
 }
