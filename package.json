@@ -4,7 +4,8 @@
   "description": "Token creation and management package.",
   "main": "index.js",
   "scripts": {
-    "test": "DEBUG=mft:* node index.js"
+    "dev": "DEBUG=mft:* node index.js",
+    "test": "DEBUG=mft:* node tests/test.js"
   },
   "repository": {
     "type": "git",
