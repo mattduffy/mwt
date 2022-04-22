@@ -86,7 +86,7 @@ function createJWToken( payload, options ) {
  * @param {Object} options - An object literal of claims to validate the token against.
  * @param {(Buffer|string)} secret - A PEM encoded public key for RSA or a string 
  * secret for HMAC algorithms.
- * @return {(|Error)} - The decoded payload or throws an Error. 
+ * @return {(Object|Error)} - The decoded payload or throws an Error. 
  */
 function checkToken( token, options, secret = null ) {
   const tokenProperties = { ...decode_options, ...options }

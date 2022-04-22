@@ -6,7 +6,7 @@ var { token, refresh } = createJWToken({ username: 'matt', email: 'matt@email.co
 
 debug('verifying the refresh token from RS256 key...')
 let verified = checkToken(token, { algorithm: 'RS256' })
-console.dir( verified )
+debug( verified )
 
 debug('verifying the refresh token from RS256 key...')
 let verifiedRefresh = checkToken(refresh, { algorithm: 'RS256', audience: 'refresh' }, null)
