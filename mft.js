@@ -1,11 +1,12 @@
-const debug = require('debug')('mft:mft')
-const fs = require('fs')
-const jwt = require('jsonwebtoken')
-const crypto = require('crypto')
+import fs from 'node:fs'
+import jwt from 'jsonwebtoken'
+import crypto from 'node:crypto'
+import Debug from 'debug'
 
+const debug = Debug('mft:index')
 const secrets = {
   id: process.env.ACCESS_TOKEN_SECRET || crypto.randomBytes(265).toString('hex'),
-  refresh: process.env.REFRESH_TOKEN_SECRET || crypto.randomBytes(256).toString('hex')
+  refresh: process.env.REFRESH_TOKEN_SECRET || crypto.randomBytes(256).toString('hex'),
 }
-debug(secrets)
 
+debug(secrets)
