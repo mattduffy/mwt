@@ -2,15 +2,21 @@
   "name": "@mattduffy/mft",
   "version": "1.0.0",
   "description": "Token creation and management package.",
+  "keywords": [
+    "jwt",
+    "json web tokens",
+    "authentication token",
+    "refresh token"
+  ],
   "main": "index.js",
   "type": "module",
   "exports": {
-    "import": "./index.js",
+    "import": "./src/index.js",
     "package.json": "./package.json",
     "test": "test/*.js"
   },
   "scripts": {
-    "dev": "DEBUG=mft:* node index.js",
+    "dev": "DEBUG=mft:* node src/index.js",
     "test": "DEBUG=mft:* node tests/test.js"
   },
   "repository": {
