@@ -17,7 +17,8 @@
   },
   "scripts": {
     "dev": "DEBUG=mft:* node src/index.js",
-    "test": "DEBUG=mft:* node tests/test.js"
+    "test": "DEBUG=mft:* node test/test.js",
+    "mocha": "DEBUG=mft:* mocha --bail --inline-diffs --ignore test/test.js test/mft-*.js"
   },
   "repository": {
     "type": "git",
@@ -34,12 +35,13 @@
     "chai-http": "4.3.0",
     "eslint": "8.28.0",
     "eslint-config-airbnb-base": "15.0.0",
-    "eslint-plugin-import": "2.26.0"
+    "eslint-plugin-import": "2.26.0",
+    "mocha": "10.1.0"
   },
   "dependencies": {
-    "dotenv": "16.0.0",
     "bcrypt": "~5.0.1",
     "debug": "4.3.4",
+    "dotenv": "16.0.0",
     "jsonwebtoken": "~8.5.1"
   }
 }
