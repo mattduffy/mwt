@@ -3,16 +3,18 @@
  * @author Matthew Duffy <mattduffy@gmail.com>
  * @file index.js The Mft class definition file.
  */
-import nodePath from 'node:path'
+import nPath from 'node:path'
 import { fileURLToPath } from 'node:url'
 import fs from 'node:fs/promises'
 import { promisify } from 'node:util'
 import { exec } from 'node:child_process'
 import { EventEmitter } from 'node:events'
+import jwt from 'jsonwebtoken'
+import crypto from 'node:crypto'
 import Debug from 'debug'
 
 const __filename = fileURLToPath(import.meta.url)
-const __dirname = nodePath.dirname(__filename)
+const __dirname = nPath.dirname(__filename)
 const cmd = promisify(exec)
 const debug = Debug('mft:class')
 
@@ -23,5 +25,16 @@ const debug = Debug('mft:class')
  * @extends EventEmitter
  */
 export class Mft extends EventEmitter {
+  constructor() {
+    super()
+    this.pubPEMPath = nPath.resolve('.', process.env.JWT_PUBKEY) || null
+    this.priPEMPath = nPath.resolve('.', process.env.JWT_PRIKEY) || null
+    this.pubPEMBuffer = null
+    this.priPEMBuffer = null
+  }
 
+  async init() {
+    this.pubPEMBuffer = await fs.readFile(this.pubPEMPath)
+    this.priPEMBuffer = await fs.readFile(this.priPEMPath)
+  }
 }

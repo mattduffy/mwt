@@ -12,6 +12,7 @@ import { exec } from 'node:child_process'
 import chai from 'chai'
 import chaiHttp from 'chai-http'
 import Debug from 'debug'
+import { Mft } from '../src/index.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = nPath.dirname(__filename)
@@ -24,8 +25,6 @@ chai.use(chaiHttp)
 /* eslint-disable func-names */
 /* eslint-disable no-undef */
 describe('jwt token service', function () {
-  debug(__filename)
-  debug(__dirname)
   before('suite hook before all tests', function () {
     // nothing here yet
   })
