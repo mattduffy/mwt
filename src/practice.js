@@ -7,6 +7,7 @@
  * @summary A package that provides some JWT functionality.
  * @module @mattduffy/mft
  * @author Matthew Duffy <mattduffy@gmail.com>
+ * @file: src/pratice.js Declarative approach to working with JWTs.
  */
 import fs from 'node:fs'
 // import fsAsync from 'node:fs/promises'
@@ -15,15 +16,11 @@ import { fileURLToPath } from 'node:url'
 import jwt from 'jsonwebtoken'
 import crypto from 'node:crypto'
 import Debug from 'debug'
+import * as dotenv from 'dotenv'
 
-const debug = Debug('mft:index')
+const debug = Debug('mft:practice')
+dotenv.config({ path: nodePath.resolve('.', './test/.env'), debug: true })
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const dotenv = await import('dotenv')
-  dotenv.config({ path: nodePath.resolve('.', 'tests/.env') })
-  debug(nodePath.resolve('.', process.env.JWT_PUBKEY))
-  debug(nodePath.resolve('.', process.env.JWT_PRIKEY))
-}
 const secrets = {
   id: process.env.ACCESS_TOKEN_SECRET || crypto.randomBytes(265).toString('hex'),
   refresh: process.env.REFRESH_TOKEN_SECRET || crypto.randomBytes(256).toString('hex'),
@@ -44,7 +41,9 @@ try {
   const privateKey = nodePath.resolve('.', process.env.JWT_PRIKEY)
   keys = {
     public: fs.readFileSync(publicKey),
+    publicPath: publicKey,
     private: fs.readFileSync(privateKey),
+    privatePath: privateKey,
   }
   debug('keys: %O', keys)
 } catch (err) {

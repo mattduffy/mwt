@@ -1,9 +1,20 @@
-/* eslint-disable no-var */
+/**
+ * This package is meant to provide some functions to make working with
+ * json web tokens more convenient.  The package wraps the jsonwebtoken npm
+ * package.  JWTs can be created from either 256 bit random strings or an
+ * 4096 bit RSA key pair.  These package is meant to be used with the
+ * @mattduffy/users package for token-based authentication.
+ * @summary A package that provides some JWT functionality.
+ * @module @mattduffy/mft
+ * @author Matthew Duffy <mattduffy@gmail.com>
+ * @file: test/test.js Declarative testing approach to working with JWTs.
+ *//* eslint-disable no-var */
 /* eslint-disable vars-on-top */
 /* eslint-disable no-redeclare */
-const debug = require('debug')('mft:test')
-const { createJWToken, checkToken } = require('../src/index.js')
+import Debug from 'debug'
+import { createJWToken, checkToken } from '../src/practice.js'
 
+const debug = Debug('mft:test')
 debug('Test 1: creating a new set of tokens...')
 var { token, refresh } = createJWToken({ username: 'matt', email: 'matt@email.com' }, { expiresIn: '1m', algorithm: 'RS256' }, null)
 

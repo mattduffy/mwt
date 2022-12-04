@@ -1,7 +1,7 @@
 /**
  * @module @mattduffy/mft
  * @author Matthew Duffy <mattduffy@gmail.com>
- * @file index.js The Mft class definition file.
+ * @file src/index.js The Mft class definition file.
  */
 import nPath from 'node:path'
 import { fileURLToPath } from 'node:url'
