@@ -16,15 +16,18 @@ import { createJWToken, checkToken } from '../src/practice.js'
 
 const debug = Debug('mft:test')
 debug('Test 1: creating a new set of tokens...')
-var { token, refresh } = createJWToken({ username: 'matt', email: 'matt@email.com' }, { expiresIn: '1m', algorithm: 'RS256' }, null)
+// var { token, refresh } = createJWToken({ username: 'matt', email: 'matt@email.com' }, { expiresIn: '1m', algorithm: 'RS256' }, null)
+var { token, refresh } = createJWToken({ username: 'matt', email: 'matt@email.com' }, { expiresIn: '1m', algorithm: 'RS256' })
 
-debug('verifying the refresh token from RS256 key...')
+debug('verifying the access token from RS256 key...')
 const verified = checkToken(token, { algorithm: 'RS256' })
-debug(verified)
+debug('token: %O', token)
+debug('verified: %O', verified)
 
 debug('verifying the refresh token from RS256 key...')
 const verifiedRefresh = checkToken(refresh, { algorithm: 'RS256', audience: 'refresh' }, null)
-debug(verifiedRefresh)
+debug('refresh: %O', refresh)
+debug('verified: %O', verifiedRefresh)
 
 let invalidToken
 
@@ -61,7 +64,7 @@ debug(invalidToken)
 debug('Test 8: failing verify check - jwt malformed')
 var { token, refresh } = createJWToken({ username: 'jwt malformed', email: 'mal@formed.mail' }, { expiresIn: '1m', algorithm: 'HS256' }, null)
 token = token.replace('.', '_')
-invalidToken = checkToken(token, { algorith: 'HS256' })
+invalidToken = checkToken(token, { algorithm: 'HS256' })
 debug(invalidToken)
 
 debug('Test 9: failing verify check - exipred')

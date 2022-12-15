@@ -21,4 +21,4 @@ module.exports = {
     'max-len': 'off',
     'object-curly-newline': 'off',
   },
-};
+}

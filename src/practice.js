@@ -83,13 +83,15 @@ const decodeOptions = {
  * @return {Object} - An object literal containing a pair of tokens.
  */
 function createJWToken(payload, options) {
-  const tokenProperties = { ...accessDefaults, ...options }
+  const o = options
+  o.algorithm = options.algorithm.toUpperCase()
+  const tokenProperties = { ...accessDefaults, ...o }
   debug('tokenProperties: %o', tokenProperties)
   let secretOrPrivateKey = (tokenProperties.algorithm === 'RS256') ? keys.private : secrets.id
   debug(secretOrPrivateKey)
   const token = jwt.sign(payload, secretOrPrivateKey, tokenProperties)
 
-  const refreshProperties = { ...refreshDefaults, ...options }
+  const refreshProperties = { ...refreshDefaults, ...o }
   secretOrPrivateKey = (refreshProperties.algorithm === 'RS256') ? keys.private : secrets.id
   const refresh = jwt.sign(payload, secretOrPrivateKey, refreshProperties)
   return { token, refresh }
@@ -104,10 +106,12 @@ function createJWToken(payload, options) {
  * @return {(Object|Error)} - The decoded payload or throws an Error.
  */
 function checkToken(token, options, secret = null) {
-  const tokenProperties = { ...decodeOptions, ...options }
+  const o = options
+  o.algorithm = options.algorithm.toUpperCase()
+  const tokenProperties = { ...decodeOptions, ...o }
   debug('combined token properties:  %o', tokenProperties)
   /* eslint-disable-next-line no-nested-ternary */
-  const secretOrPublicKey = (options.algorithm === 'RS256') ? keys.public : (secret === null) ? secrets.id : secret
+  const secretOrPublicKey = (o.algorithm === 'RS256') ? keys.public : (secret === null) ? secrets.id : secret
   let verified
   jwt.verify(token, secretOrPublicKey, tokenProperties, (err, decoded) => {
     if (err !== null) {
