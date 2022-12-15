@@ -5,7 +5,7 @@
  * 4096 bit RSA key pair.  These package is meant to be used with the
  * @mattduffy/users package for token-based authentication.
  * @summary A package that provides some JWT functionality.
- * @module @mattduffy/mft
+ * @module @mattduffy/mwt
  * @author Matthew Duffy <mattduffy@gmail.com>
  * @file: src/pratice.js Declarative approach to working with JWTs.
  */
@@ -18,7 +18,7 @@ import crypto from 'node:crypto'
 import Debug from 'debug'
 import * as dotenv from 'dotenv'
 
-const debug = Debug('mft:practice')
+const debug = Debug('mwt:practice')
 dotenv.config({ path: nodePath.resolve('.', './test/.env'), debug: true })
 
 const secrets = {

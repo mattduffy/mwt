@@ -1,7 +1,7 @@
 /**
- * @module @mattduffy/mft
+ * @module @mattduffy/mwt
  * @author Matthew Duffy <mattduffy@gmail.com>
- * @file test/mft-test.js A Mocha test suite testing the methods of the Mft class.
+ * @file test/mwt-test.js A Mocha test suite testing the methods of the Mwt class.
  */
 /* eslint-disable import/first */
 process.env.NODE_ENV = 'test'
@@ -12,11 +12,11 @@ import { exec } from 'node:child_process'
 import chai from 'chai'
 import chaiHttp from 'chai-http'
 import Debug from 'debug'
-import { Mft } from '../src/index.js'
+import { Mwt } from '../src/index.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = nPath.dirname(__filename)
-const debug = Debug('mft:test')
+const debug = Debug('mwt:test')
 const cmd = promisify(exec)
 const should = chai.should()
 chai.use(chaiHttp)
@@ -37,9 +37,9 @@ describe('jwt token service', function () {
   afterEach('suite hook afterEach test', function () {
     // nothing here yet
   })
-  describe('Mft class', function () {
-    it('should return an mft instance', function () {
-      debug('create an mft instance...')
+  describe('Mwt class', function () {
+    it('should return an mwt instance', function () {
+      debug('create an mwt instance...')
     })
   })
 })

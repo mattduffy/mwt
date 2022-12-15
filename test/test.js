@@ -5,7 +5,7 @@
  * 4096 bit RSA key pair.  These package is meant to be used with the
  * @mattduffy/users package for token-based authentication.
  * @summary A package that provides some JWT functionality.
- * @module @mattduffy/mft
+ * @module @mattduffy/mwt
  * @author Matthew Duffy <mattduffy@gmail.com>
  * @file: test/test.js Declarative testing approach to working with JWTs.
  *//* eslint-disable no-var */
@@ -14,7 +14,7 @@
 import Debug from 'debug'
 import { createJWToken, checkToken } from '../src/practice.js'
 
-const debug = Debug('mft:test')
+const debug = Debug('mwt:test')
 debug('Test 1: creating a new set of tokens...')
 // var { token, refresh } = createJWToken({ username: 'matt', email: 'matt@email.com' }, { expiresIn: '1m', algorithm: 'RS256' }, null)
 var { token, refresh } = createJWToken({ username: 'matt', email: 'matt@email.com' }, { expiresIn: '1m', algorithm: 'RS256' })

@@ -1,5 +1,5 @@
 {
-  "name": "@mattduffy/mft",
+  "name": "@mattduffy/mwt",
   "version": "1.0.0",
   "description": "Token creation and management package.",
   "keywords": [
@@ -16,20 +16,20 @@
     "test": "test/*.js"
   },
   "scripts": {
-    "dev": "DEBUG=mft:* node src/index.js",
-    "test": "DEBUG=mft:* node test/test.js",
-    "mocha": "DEBUG=mft:* mocha --bail --inline-diffs --ignore test/test.js test/mft-*.js"
+    "dev": "DEBUG=mwt:* node src/index.js",
+    "test": "DEBUG=mwt:* node test/test.js",
+    "mocha": "DEBUG=mwt:* mocha --bail --inline-diffs --ignore test/test.js test/mwt-*.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mattduffy/mft.git"
+    "url": "git+https://github.com/mattduffy/mwt.git"
   },
   "author": "mattduffy@gmail.com",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mattduffy/mft/issues"
+    "url": "https://github.com/mattduffy/mwt/issues"
   },
-  "homepage": "https://github.com/mattduffy/mft#readme",
+  "homepage": "https://github.com/mattduffy/mwt#readme",
   "devDependencies": {
     "chai": "4.3.7",
     "chai-http": "4.3.0",
@@ -42,6 +42,7 @@
     "bcrypt": "~5.0.1",
     "debug": "4.3.4",
     "dotenv": "16.0.0",
+    "jose": "4.11.1",
     "jsonwebtoken": "~8.5.1"
   }
 }

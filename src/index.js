@@ -1,7 +1,7 @@
 /**
- * @module @mattduffy/mft
+ * @module @mattduffy/mwt
  * @author Matthew Duffy <mattduffy@gmail.com>
- * @file src/index.js The Mft class definition file.
+ * @file src/index.js The Mwt class definition file.
  */
 import nPath from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -16,7 +16,7 @@ import Debug from 'debug'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = nPath.dirname(__filename)
 const cmd = promisify(exec)
-const debug = Debug('mft:class')
+const debug = Debug('mwt:class')
 
 /**
  * A utility class to simplify the creation, encoding and decoding of JSON Web Tokens (jwt).
@@ -24,7 +24,7 @@ const debug = Debug('mft:class')
  * @author Matthew Duffy <mattduffy@gmail.com>
  * @extends EventEmitter
  */
-export class Mft extends EventEmitter {
+export class Mwt extends EventEmitter {
   constructor() {
     super()
     this.pubPEMPath = nPath.resolve('.', process.env.JWT_PUBKEY) || null
