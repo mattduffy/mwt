@@ -15,5 +15,6 @@
 - [ ] constructor: create a class constructor method to initialize Mft class
 - [ ] init: method to perform asynchronous operations after initialization
 - [ ] - check environment variables for key pairs
-- [ ] - set array of found key pairs, but type (admin, user, etc.)
+- [ ] - set array of found key pairs, by type (access, identity, admin, user, etc.)
 - [ ] - add unit tests to valid instance creation 
+- [ ] 

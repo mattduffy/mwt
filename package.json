@@ -6,14 +6,17 @@
     "jwt",
     "json web tokens",
     "authentication token",
+    "access token",
+    "identity token",
     "refresh token"
   ],
   "main": "index.js",
   "type": "module",
   "exports": {
-    "import": "./src/index.js",
-    "package.json": "./package.json",
-    "test": "test/*.js"
+    ".": "./src/index.js",
+    "./mwt": "./src/mwt.js",
+    "./practice": "./src/practice.js",
+    "./package.json": "./package.json"
   },
   "scripts": {
     "dev": "DEBUG=mwt:* node src/index.js",
