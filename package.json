@@ -2,16 +2,18 @@
   "name": "@mattduffy/mwt",
   "version": "1.0.0",
   "description": "Token creation and management package.",
-  "keywords": [
-    "jwt",
-    "json web tokens",
-    "authentication token",
-    "access token",
-    "identity token",
-    "refresh token"
-  ],
+  "author": "mattduffy@gmail.com",
+  "license": "ISC",
   "main": "index.js",
   "type": "module",
+  "homepage": "https://github.com/mattduffy/mwt#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattduffy/mwt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mattduffy/mwt/issues"
+  },
   "exports": {
     ".": "./src/index.js",
     "./mwt": "./src/mwt.js",
@@ -23,16 +25,6 @@
     "test": "DEBUG=mwt:* node test/test.js",
     "mocha": "DEBUG=mwt:* mocha --bail --inline-diffs --ignore test/test.js test/mwt-*.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mattduffy/mwt.git"
-  },
-  "author": "mattduffy@gmail.com",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mattduffy/mwt/issues"
-  },
-  "homepage": "https://github.com/mattduffy/mwt#readme",
   "devDependencies": {
     "chai": "4.3.7",
     "chai-http": "4.3.0",
@@ -47,5 +39,13 @@
     "dotenv": "16.0.0",
     "jose": "4.11.1",
     "jsonwebtoken": "~8.5.1"
-  }
+  },
+  "keywords": [
+    "jwt",
+    "json web tokens",
+    "authentication token",
+    "access token",
+    "identity token",
+    "refresh token"
+  ]
 }

@@ -12,14 +12,21 @@
 import fs from 'node:fs'
 // import fsAsync from 'node:fs/promises'
 import nodePath from 'node:path'
-// import { fileURLToPath } from 'node:url'
+import { fileURLToPath } from 'node:url'
 import jwt from 'jsonwebtoken'
 import crypto from 'node:crypto'
 import Debug from 'debug'
 import * as dotenv from 'dotenv'
 
 const debug = Debug('mwt:practice')
-dotenv.config({ path: nodePath.resolve('.', './test/.env'), debug: true })
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = nodePath.dirname(__filename)
+const keyDir = nodePath.resolve(__dirname, '../test')
+const environmentFile = `${keyDir}/.env`
+debug(`keyDir ${keyDir}`)
+debug(`environmentFile: ${environmentFile}`)
+dotenv.config({ path: environmentFile, debug: true })
+debug(`JWT_PUBKEY: ${process.env.JWT_PUBKEY}`)
 
 const secrets = {
   id: process.env.ACCESS_TOKEN_SECRET || crypto.randomBytes(265).toString('hex'),
@@ -37,8 +44,8 @@ function _createJWTId() {
 
 let keys = null
 try {
-  const publicKey = nodePath.resolve('.', process.env.JWT_PUBKEY)
-  const privateKey = nodePath.resolve('.', process.env.JWT_PRIKEY)
+  const publicKey = nodePath.resolve(keyDir, process.env.JWT_PUBKEY)
+  const privateKey = nodePath.resolve(keyDir, process.env.JWT_PRIKEY)
   keys = {
     public: fs.readFileSync(publicKey),
     publicPath: publicKey,
