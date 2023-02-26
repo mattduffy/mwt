@@ -27,8 +27,8 @@ const debug = Debug('mwt:class')
 export class Mwt extends EventEmitter {
   constructor() {
     super()
-    this.pubPEMPath = nPath.resolve('.', process.env.JWT_PUBKEY) || null
-    this.priPEMPath = nPath.resolve('.', process.env.JWT_PRIKEY) || null
+    this.pubPEMPath = nPath.resolve('.', process.env.JWT_PUBKEY) ?? null
+    this.priPEMPath = nPath.resolve('.', process.env.JWT_PRIKEY) ?? null
     this.pubPEMBuffer = null
     this.priPEMBuffer = null
   }

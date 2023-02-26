@@ -5,8 +5,8 @@ import Debug from 'debug'
 
 const debug = Debug('mwt:index')
 const secrets = {
-  id: process.env.ACCESS_TOKEN_SECRET || crypto.randomBytes(265).toString('hex'),
-  refresh: process.env.REFRESH_TOKEN_SECRET || crypto.randomBytes(256).toString('hex'),
+  id: process.env.ACCESS_TOKEN_SECRET ?? crypto.randomBytes(265).toString('hex'),
+  refresh: process.env.REFRESH_TOKEN_SECRET ?? crypto.randomBytes(256).toString('hex'),
 }
 
 debug(secrets)
